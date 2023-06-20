@@ -5,7 +5,7 @@ export default function Informacoes() {
   return (
     <Center flex ={'1'}>
         <Text>
-            Home
+        Informacoes
         </Text>
     </Center>
   );

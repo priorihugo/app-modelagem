@@ -5,7 +5,7 @@ export default function CarteirinhaVirtual() {
   return (
     <Center flex ={'1'}>
         <Text>
-            Home
+            Carteirinha
         </Text>
     </Center>
   );

@@ -5,7 +5,7 @@ export default function Recarga() {
   return (
     <Center flex ={'1'}>
         <Text>
-            Home
+        Recarga
         </Text>
     </Center>
   );
