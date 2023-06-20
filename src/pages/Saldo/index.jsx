@@ -5,7 +5,7 @@ export default function Saldo() {
   return (
     <Center flex ={'1'}>
         <Text>
-            Home
+            Saldo
         </Text>
     </Center>
   );
