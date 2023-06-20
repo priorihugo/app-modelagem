@@ -2,10 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Flex } from 'native-base';
 import React from 'react';
 import { View } from 'react-native';
-import { RotaUsuario } from './RotaUsuario';
+import RotaUsuario from './RotaUsuario';
 
 
-export function Routes() {
+export default function Routes() {
   return (
     <NavigationContainer>
       <RotaUsuario/>

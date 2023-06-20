@@ -1,11 +1,11 @@
 import React from 'react';
 import { Center, Text, VStack } from 'native-base';
 
-export function Transferencia() {
+export default function Transferencia() {
   return (
     <Center flex ={'1'}>
         <Text>
-            Home
+            Transferencia
         </Text>
     </Center>
   );

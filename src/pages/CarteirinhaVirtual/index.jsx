@@ -1,7 +1,7 @@
 import React from 'react';
 import { Center, Text, VStack } from 'native-base';
 
-export function CarteirinhaVirtual() {
+export default function CarteirinhaVirtual() {
   return (
     <Center flex ={'1'}>
         <Text>

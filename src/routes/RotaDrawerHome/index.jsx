@@ -1,17 +1,17 @@
 import React from 'react';
 import { VStack } from 'native-base';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Home } from '../../pages/Home';
-import { Cardapio } from '../../pages/Cardapio';
-import { CarteirinhaVirtual } from '../../pages/CarteirinhaVirtual';
-import { Informacoes } from '../../pages/Informacoes';
-import { Recarga } from '../../pages/Recarga';
-import { Saldo } from '../../pages/Saldo';
-import { Transferencia } from '../../pages/Transferencia';
+import Home from '../../pages/Home';
+import Cardapio from '../../pages/Cardapio';
+import CarteirinhaVirtual from '../../pages/CarteirinhaVirtual';
+import Informacoes from '../../pages/Informacoes';
+import Recarga from '../../pages/Recarga';
+import Saldo from '../../pages/Saldo';
+import Transferencia from '../../pages/Transferencia';
 
 const Drawer = createDrawerNavigator();
 
-export function RotaDrawerHome() {
+export default function RotaDrawerHome() {
   return (
     <Drawer.Navigator>
         <Drawer.Screen name = 'Principal' component={Home}/>
