@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Flex, Icon, Image, Row, Text, VStack } from "native-base";
+import { FlatList, Flex, Heading, Icon, Image, Row, Text, VStack } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
 
@@ -33,10 +33,9 @@ export function Noticias() {
 
 
   return (
-    <Flex flex={"1"}>
+    <Flex flex={"1"} px={4} py={10}>
+        <Heading>Notícias</Heading>
       <FlatList
-      my={10}
-      mx={4}
       pagingEnabled={true}
         data={data}
         ItemSeparatorComponent={()=>{

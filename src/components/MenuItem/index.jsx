@@ -25,7 +25,7 @@ export default function MenuItem({
             style={{ color: iconColor }}
           />
         }
-        //onPress={() => navigation.navigate(goTo)}
+        onPress={() => navigation.navigate(goTo)}
       />
       <Text
         textAlign={"center"}

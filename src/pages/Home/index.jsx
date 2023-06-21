@@ -12,18 +12,22 @@ export default function Home() {
           <MenuItem
             label={'Cardapio'}
             iconImage={'restaurant-menu'}
+            goTo={'Cardapio'}
           />
           <MenuItem
             label={'Extrato'}
             iconImage={'attach-money'}
+            goTo={'Saldo'}
           />
           <MenuItem
             label={'Recarga'}
             iconImage={'credit-card'}
+            goTo={'Recarga'}
             />
           <MenuItem
             label={'Carteirinha'}
             iconImage={'person'}
+            goTo={'Carteirinha Virtual'}
 
           />
         </Flex>
