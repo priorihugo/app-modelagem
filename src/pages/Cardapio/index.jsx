@@ -5,7 +5,7 @@ import { CardapioItem } from "./CardapioItem";
 export default function Cardapio() {
   return (
     <Center flex={"1"} >
-      <ScrollView backgroundColor={'green.200'}>
+      <ScrollView>
         <CardapioItem
           title={"Prato Principal"}
           description={"Isca de Frango ao molho de ervas"}

@@ -7,6 +7,7 @@ export default function MenuItem({
   iconImage,
   label,
   goTo,
+  boxSize = 24,
   buttonColor = "black",
   iconColor = "white",
 }) {
@@ -16,7 +17,7 @@ export default function MenuItem({
     <Column alignItems={"center"} flexDirection={"column"} w={"35%"} mb= {2}>
       <IconButton
         borderRadius={8}
-        boxSize={24}
+        boxSize={boxSize}
         backgroundColor={buttonColor}
         icon={
           <MaterialIcons

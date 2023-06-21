@@ -4,7 +4,7 @@ import { Center, Column, Flex, Heading, Image, Row, VStack } from "native-base";
 export function CardapioItem({ title, description, imgSource }) {
   return (
     <Center w={"100%"}>
-      <Row flex={1} my={4} w={"95%"} backgroundColor={"red.200"}>
+      <Row flex={1} my={4} w={"95%"}>
         <Image src={imgSource} />
         <Column w={"100%"}>
           <Heading>{title}</Heading>
