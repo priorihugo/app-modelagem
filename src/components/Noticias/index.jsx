@@ -1,8 +1,16 @@
 import React from "react";
-import { FlatList, Flex, Heading, Icon, Image, Row, Text, VStack } from "native-base";
+import {
+  FlatList,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Row,
+  Text,
+  VStack,
+} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
-
 
 const data = [
   {
@@ -28,28 +36,35 @@ const data = [
 ];
 
 export function Noticias() {
-
   const winSize = useWindowDimensions();
 
-
   return (
-    <Flex flex={"1"} px={4} py={10}>
-        <Heading>Notícias</Heading>
+    <Flex flex={"1"} px={4} py={10} >
+      <Heading>Notícias</Heading>
       <FlatList
-      pagingEnabled={true}
+
+        maxH={40}
+        pagingEnabled={true}
         data={data}
-        ItemSeparatorComponent={()=>{
-            return (
-                <Icon
-                  alignSelf={"center"}
-                  size={5}
-                  as={<MaterialIcons name={"chevron-right"} />}
-                />
-              );
+        ItemSeparatorComponent={() => {
+          return (
+            <Icon
+              alignSelf={"center"}
+              size={5}
+              as={<MaterialIcons name={"chevron-right"} />}
+            />
+          );
         }}
         renderItem={({ item }) => {
           return (
-            <Row borderWidth={1} borderRadius={4} borderColor={'black'} w={winSize.width - 80} backgroundColor={'gray.100'}>
+            <Row
+              borderWidth={1}
+              borderRadius={4}
+              borderColor={"black"}
+              w={winSize.width - 80}
+              
+              backgroundColor={"gray.100"}
+            >
               <Image src={item.image} />
               <Text>{item.title}</Text>
             </Row>
