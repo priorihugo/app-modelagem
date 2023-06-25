@@ -3,7 +3,7 @@ import { Center, Column, Divider, Heading, Row, Text, VStack } from "native-base
 
 export default function Informacoes() {
   return (
-    <Center flex={"1"}>
+    <Center flex={"1"} backgroundColor={'#F2F2F2'}>
 
       <Row w={'90%'} justifyContent={'space-between'}>
       <Text>Movimentação</Text>

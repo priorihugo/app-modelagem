@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Center,
   FlatList,
   Flex,
   Heading,
@@ -11,6 +12,7 @@ import {
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
+import { Noticia } from "./Noticia";
 
 const data = [
   {
@@ -39,10 +41,9 @@ export function Noticias() {
   const winSize = useWindowDimensions();
 
   return (
-    <Flex flex={"1"} px={4} py={10} >
+    <Flex flex={"1"} px={4}>
       <Heading>Notícias</Heading>
       <FlatList
-
         maxH={40}
         pagingEnabled={true}
         data={data}
@@ -55,21 +56,7 @@ export function Noticias() {
             />
           );
         }}
-        renderItem={({ item }) => {
-          return (
-            <Row
-              borderWidth={1}
-              borderRadius={4}
-              borderColor={"black"}
-              w={winSize.width - 80}
-              
-              backgroundColor={"gray.100"}
-            >
-              <Image src={item.image} />
-              <Text>{item.title}</Text>
-            </Row>
-          );
-        }}
+        renderItem={({ item }) => <Noticia item={item} />}
         horizontal={true}
       />
     </Flex>

@@ -22,9 +22,9 @@ export default function Login() {
   } = useForm();
 
   return (
-    <Center height={"full"} width="full" backgroundColor={"white"}>
+    <Center height={"full"} width="full" backgroundColor={"#F2F2F2"}>
       <Column width={"4/5"} space={4}>
-        <Heading>Entrar</Heading>
+        <Heading color={'#BF1120'} >Entrar</Heading>
 
         <ControlledInputField
           control={control}
@@ -47,9 +47,11 @@ export default function Login() {
         <Divider backgroundColor={"black"} />
 
         <Button
+          backgroundColor={"#BF1120"}
           onPress={
             //handleSubmit(handleSignUp)
             () => {
+              console.log('login pressed')
               navigation.navigate("RotaDrawerHome");
             }
           }
@@ -70,6 +72,7 @@ export default function Login() {
           Não possui um cadastro?
         </Text>
         <Button
+          backgroundColor={"#BF1120"}
           onPress={() => {
             navigation.navigate("RotaDrawerHome");
           }}

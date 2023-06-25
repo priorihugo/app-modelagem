@@ -11,7 +11,7 @@ export default function Transferencia() {
   } = useForm();
 
   return (
-    <Center flex={"1"}>
+    <Center flex={"1"} backgroundColor={'#F2F2F2'}>
       <Column w={"90%"}>
         <Text>Origem</Text>
         <Divider my={1} />
@@ -52,7 +52,7 @@ export default function Transferencia() {
         />
       </Column>
 
-      <Button w={'90%'} my={4}>
+      <Button w={'90%'} my={4} backgroundColor={'#BF1120'}>
         Confirmar
       </Button>
     </Center>

@@ -2,18 +2,21 @@ import React from "react";
 import { Center, Column, Heading, Image, Row, Text } from "native-base";
 
 export default function Carteirinha() {
+  const placeholder = require("../../assets/profile-placeholder.jpg");
+
   return (
-    <Column borderRadius={4} backgroundColor={"gray.200"} w={"90%"}>
+    <Column borderRadius={7} backgroundColor={"gray.200"} w={"90%"}>
       <Row
-        backgroundColor={"red.400"}
+        backgroundColor={"#BF1120"}
         color={"white"}
-        borderTopRadius={4}
+        borderTopRadius={7}
         justifyContent={"space-between"}
         p={2}
       >
         <Center>
-
-        <Heading color={"white"}>ufjf</Heading>
+          <Heading italic bold={false} color={"white"}>
+            ufjf
+          </Heading>
         </Center>
 
         <Column>
@@ -22,27 +25,29 @@ export default function Carteirinha() {
         </Column>
       </Row>
 
-      <Row>
-        <Image />
+      <Row p={2}>
+        <Center>
+          <Image source={placeholder} size={40}/>
+        </Center>
 
         <Column flex={"1"} my={2}>
-          <Text color={"red.400"}>nome/name</Text>
+          <Text color={"red.400"}>Nome/Name:</Text>
           <Text>Zezinho</Text>
-          <Text color={"red.400"}>Curso/Program</Text>
+          <Text color={"red.400"}>Curso/Program:</Text>
           <Text>Sistemas de informação</Text>
 
           <Column w={"100%"}>
-            <Text color={"red.400"}>Matricula/Reg.#</Text>
+            <Text color={"red.400"}>Matricula/Reg.#:</Text>
             <Text>202011111</Text>
 
             <Row justifyContent={"space-between"}>
               <Column>
-                <Text color={"red.400"}>CPF</Text>
+                <Text color={"red.400"}>CPF:</Text>
                 <Text>111.222.333-44</Text>
               </Column>
 
               <Column>
-                <Text color={"red.400"}>Identidade/ID</Text>
+                <Text color={"red.400"}>Identidade/ID:</Text>
                 <Text>123456789</Text>
               </Column>
             </Row>

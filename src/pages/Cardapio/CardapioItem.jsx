@@ -13,6 +13,7 @@ export function CardapioItem({ title, description, imgSource }) {
             borderWidth={1}
             borderColor={"black"}
             borderRadius={4}
+            py={2}
           >
             {description}
           </Center>

@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useWindowDimensions } from "react-native";
 
 export default function MenuItem({
-  iconImage,
+  iconName,
+  Icon = undefined,
   label,
   goTo,
   boxSize = 24,
@@ -14,17 +15,21 @@ export default function MenuItem({
   const navigation = useNavigation();
 
   return (
-    <Column alignItems={"center"} flexDirection={"column"} w={"35%"} mb= {2}>
+    <Column alignItems={"center"} flexDirection={"column"} w={"35%"} mb={2}>
       <IconButton
         borderRadius={8}
         boxSize={boxSize}
         backgroundColor={buttonColor}
         icon={
-          <MaterialIcons
-            name={iconImage}
-            size={40}
-            style={{ color: iconColor }}
-          />
+          Icon ? (
+            <Icon size={40} style={{ color: iconColor }} />
+          ) : (
+            <MaterialIcons
+              name={iconName}
+              size={40}
+              style={{ color: iconColor }}
+            />
+          )
         }
         onPress={() => navigation.navigate(goTo)}
       />

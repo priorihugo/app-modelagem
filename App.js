@@ -11,6 +11,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <NativeBaseProvider>
+      <StatusBar backgroundColor='white'/>
         <Routes/>
     </NativeBaseProvider>
   );
