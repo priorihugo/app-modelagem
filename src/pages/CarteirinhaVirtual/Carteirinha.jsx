@@ -1,22 +1,21 @@
 import React from "react";
-import { Center, Column, Heading, Image, Row, Text } from "native-base";
+import { Center, Column, Divider, Heading, Image, Row, Text } from "native-base";
 
 export default function Carteirinha() {
   const placeholder = require("../../assets/profile-placeholder.jpg");
+  const logo = require("../../assets/UFJF-logo.jpg");
 
   return (
     <Column borderRadius={7} backgroundColor={"gray.200"} w={"90%"}>
       <Row
-        backgroundColor={"#BF1120"}
+        backgroundColor={"#A6121F"}
         color={"white"}
         borderTopRadius={7}
         justifyContent={"space-between"}
         p={2}
       >
         <Center>
-          <Heading italic bold={false} color={"white"}>
-            ufjf
-          </Heading>
+          <Image source={logo} size={10} />
         </Center>
 
         <Column>
@@ -25,35 +24,48 @@ export default function Carteirinha() {
         </Column>
       </Row>
 
-      <Row p={2}>
-        <Center>
-          <Image source={placeholder} size={40}/>
+      <Row p={2} fontSize={11}>
+        <Center mr={2}>
+          <Image source={placeholder} size={"md"} />
         </Center>
 
         <Column flex={"1"} my={2}>
-          <Text color={"red.400"}>Nome/Name:</Text>
-          <Text>Zezinho</Text>
-          <Text color={"red.400"}>Curso/Program:</Text>
-          <Text>Sistemas de informação</Text>
+          <Text fontSize={11} color={"red.400"}>
+            Nome/Name:
+          </Text>
+          <Text fontSize={11}>Zezinho</Text>
+          <Text fontSize={11} color={"red.400"}>
+            Curso/Program:
+          </Text>
+          <Text fontSize={11}>Sistemas de informação</Text>
 
           <Column w={"100%"}>
-            <Text color={"red.400"}>Matricula/Reg.#:</Text>
-            <Text>202011111</Text>
+            <Text fontSize={11} color={"red.400"}>
+              Matricula/Reg.#:
+            </Text>
+            <Text fontSize={11}>202011111</Text>
 
             <Row justifyContent={"space-between"}>
               <Column>
-                <Text color={"red.400"}>CPF:</Text>
-                <Text>111.222.333-44</Text>
+                <Text fontSize={11} color={"red.400"}>
+                  CPF:
+                </Text>
+                <Text fontSize={11}>111.222.333-44</Text>
               </Column>
 
               <Column>
-                <Text color={"red.400"}>Identidade/ID:</Text>
-                <Text>123456789</Text>
+                <Text fontSize={11} color={"red.400"}>
+                  Identidade/ID:
+                </Text>
+                <Text fontSize={11}>123456789</Text>
               </Column>
             </Row>
           </Column>
         </Column>
       </Row>
+
+      <Text>QRCode</Text>
+      <Divider />
     </Column>
   );
 }

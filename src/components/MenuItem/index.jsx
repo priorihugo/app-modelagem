@@ -22,7 +22,7 @@ export default function MenuItem({
         backgroundColor={buttonColor}
         icon={
           Icon ? (
-            <Icon size={40} style={{ color: iconColor }} />
+            Icon
           ) : (
             <MaterialIcons
               name={iconName}

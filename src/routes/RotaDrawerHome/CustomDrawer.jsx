@@ -8,6 +8,11 @@ import {
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+import { faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons/faMoneyBillTransfer";
+import { faPiggyBank } from "@fortawesome/free-solid-svg-icons/faPiggyBank";
+import { faIdCard } from "@fortawesome/free-regular-svg-icons";
 
 /*
 <Drawer.Screen name="Principal" component={Home} />
@@ -25,14 +30,14 @@ import { useNavigation } from "@react-navigation/native";
 */
 
 export function CustomDrawer() {
-  const image = require("../../assets/UFJF-logo.jpg");
+  const logo = require("../../assets/UFJF-logo.jpg");
   const navigation = useNavigation();
-  console.log(image);
+  console.log(logo);
   return (
     <Column flex={"1"} backgroundColor={"#261F1D"}>
       <Row my={10} alignItems={"center"} p={4} space={2}>
         <Image
-          source={image}
+          source={logo}
           alt="UFJF Logo"
           borderRadius={100}
           resizeMode="contain"
@@ -56,7 +61,7 @@ export function CustomDrawer() {
           inactiveTintColor="white"
           label={"Carteirinha Virtual"}
           icon={({ color, size }) => (
-            <MaterialIcons name="credit-card" color={color} size={size} />
+            <FontAwesomeIcon icon={faIdCard} size={size} color={color} />
           )}
           onPress={() => {
             navigation.navigate("Carteirinha Virtual");
@@ -76,7 +81,7 @@ export function CustomDrawer() {
           inactiveTintColor="white"
           label={"Recarga"}
           icon={({ color, size }) => (
-            <MaterialIcons name="add-card" color={color} size={size} />
+            <FontAwesomeIcon icon={faPiggyBank} color={color} size={size} />
           )}
           onPress={() => {
             navigation.navigate("Recarga");
@@ -96,7 +101,11 @@ export function CustomDrawer() {
           inactiveTintColor="white"
           label={"Transferencia"}
           icon={({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
+            <FontAwesomeIcon
+              icon={faMoneyBillTransfer}
+              color={color}
+              size={size}
+            />
           )}
           onPress={() => {
             navigation.navigate("Transferencia");

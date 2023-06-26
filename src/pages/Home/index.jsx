@@ -10,6 +10,9 @@ import {
 } from "native-base";
 import { Noticias } from "../../components/Noticias";
 import MenuItem from "../../components/MenuItem";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faIdCard } from "@fortawesome/free-regular-svg-icons";
+import { faPiggyBank } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   return (
@@ -42,12 +45,14 @@ export default function Home() {
         />
         <MenuItem
           label={"Recarga"}
+          Icon={<FontAwesomeIcon icon={faPiggyBank} color={'white'} size={40} />}
           iconName={"credit-card"}
           goTo={"Recarga"}
           buttonColor={"#BF1120"}
         />
         <MenuItem
           label={"Carteirinha"}
+          Icon={<FontAwesomeIcon icon={faIdCard} size={40} style={{ color: 'white' }}  />}
           iconName={"person"}
           goTo={"Carteirinha Virtual"}
           buttonColor={"#BF1120"}
