@@ -48,15 +48,15 @@ export default function Saldo() {
   const saldo = "100";
 
   return (
-    <Center flex={"1"} flexDirection={"column"} backgroundColor={'#F2F2F2'} > 
+    <Center flex={"1"} flexDirection={"column"} backgroundColor={"#F2F2F2"}>
       <Divider />
       <Heading>Seu saldo</Heading>
       <Center w={"80%"} borderWidth={1} borderRadius={4} borderColor={"black"}>
         <Text>R${saldo}</Text>
       </Center>
-      <Divider />
+      <Divider my={4}/>
 
-      <Text my={4}>Seu Extrato</Text>
+      <Text >Seu Extrato</Text>
 
       <FlatList
         w={"90%"}
@@ -68,6 +68,12 @@ export default function Saldo() {
           return (
             <Column flex={"1"}>
               <Text>{item.date}</Text>
+
+              {item.amount < 0 ? (
+                <Text>Destino: </Text>
+              ) : (
+                <Text>Origem: </Text>
+              )}
 
               <Center
                 flex={"1"}
