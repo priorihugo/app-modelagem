@@ -1,0 +1,18 @@
+{
+    "users" :{
+        "1" : {
+            "name" : "gustavoFurtado",
+            "password" : "123456",
+            "email" : "gustavo.furtado@estudante.ufjf.br",
+            "phone" : "32 99999-9999",
+            "address" : "Rua dos bobos, 0",
+            "matricula" : "202176024",
+            "cpf" : "123.456.789-00",
+            "curos" : "Sistema de Informação"
+        },
+        "2" : {
+            "name" : "user2",
+            "password" : "password2"
+        }
+    }
+}
