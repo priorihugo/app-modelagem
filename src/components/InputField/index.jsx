@@ -8,6 +8,7 @@ export default function InputField({
   errorMessage,
   isInvalid,
   secureTextEntry,
+  content,
   ...rest
 }) {
   const invalid = !!errorMessage || isInvalid;
@@ -44,7 +45,9 @@ export default function InputField({
         }
         isInvalid={invalid}
         secureTextEntry={show}
+        value={content}
         {...rest}
+        
       />
       <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
     </FormControl>

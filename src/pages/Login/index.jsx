@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Alert } from "react-native";
 import {
   Button,
   Center,
@@ -13,6 +14,10 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { ControlledInputField } from "../../components/ControlledInputField";
 
+import Usuario from "../../data/classes/User.js";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function Login() {
   const navigation = useNavigation();
   const {
@@ -20,6 +25,9 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   return (
     <Center height={"full"} width="full" backgroundColor={"#F2F2F2"}>
@@ -29,10 +37,11 @@ export default function Login() {
         <ControlledInputField
           control={control}
           errors={errors}
-          inputLabel={"CPF"}
+          inputLabel={"Email"}
           leftIconName={"person"}
-          name={"cpf"}
-          placeholder={"Insira seu cpf"}
+          name={"email"}
+          placeholder={"Insira seu email"}
+          content={email}
         />
 
         <ControlledInputField
@@ -42,6 +51,7 @@ export default function Login() {
           leftIconName={"lock"}
           name={"password"}
           placeholder={"Insira sua senha"}
+          content={password}
         />
 
         <Divider backgroundColor={"black"} />
@@ -49,10 +59,9 @@ export default function Login() {
         <Button
           backgroundColor={"#BF1120"}
           onPress={
-            //handleSubmit(handleSignUp)
             () => {
+              Alert(email)
               console.log('login pressed')
-              navigation.navigate("RotaDrawerHome");
             }
           }
         >

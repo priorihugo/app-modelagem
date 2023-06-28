@@ -1,4 +1,5 @@
 import {
+    getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendEmailVerification,
@@ -7,7 +8,11 @@ import {
 
 import FirebaseError from "../Error/firebaseError.js";
 
-export async function signIn(auth, email, password) {
+import { app } from "../connectFirebase.js"
+
+const auth = getAuth(app);
+
+export async function signIn(email, password) {
     try {
         await signInWithEmailAndPassword(
             auth,
@@ -16,8 +21,7 @@ export async function signIn(auth, email, password) {
         );
         return auth.currentUser;
     } catch (error) {
-        if (error instanceof FirebaseError) throw error;
-        else throw new FirebaseError(error.code);
+        throw new FirebaseError(error.code);
     }
 }
 
