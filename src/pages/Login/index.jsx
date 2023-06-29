@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-native";
 import {
   Button,
@@ -17,22 +17,40 @@ import { ControlledInputField } from "../../components/ControlledInputField";
 import Usuario from "../../data/classes/User.js";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { signIn } from "../../data/Auth/login";
+import { AuthContext } from "../../context/authContext";
 
 export default function Login() {
   const navigation = useNavigation();
+
+  const auth = useContext(AuthContext);
+
   const {
     control,
     handleSubmit,
+    getValues,
+    trigger,
     formState: { errors },
   } = useForm();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const handleLogin = () => {
+    if (trigger()) {
+      const data = getValues();
+      console.log("data ", data);
+
+      try {
+        auth.realizarLogin(data.email, data.password);
+        navigation.navigate("RotaDrawerHome");
+      } catch (err) {
+        console.log("handle login err ", err);
+      }
+    }
+  };
 
   return (
     <Center height={"full"} width="full" backgroundColor={"#F2F2F2"}>
       <Column width={"4/5"} space={4}>
-        <Heading color={'#BF1120'} >Entrar</Heading>
+        <Heading color={"#BF1120"}>Entrar</Heading>
 
         <ControlledInputField
           control={control}
@@ -41,7 +59,6 @@ export default function Login() {
           leftIconName={"person"}
           name={"email"}
           placeholder={"Insira seu email"}
-          content={email}
         />
 
         <ControlledInputField
@@ -51,20 +68,11 @@ export default function Login() {
           leftIconName={"lock"}
           name={"password"}
           placeholder={"Insira sua senha"}
-          content={password}
         />
 
         <Divider backgroundColor={"black"} />
 
-        <Button
-          backgroundColor={"#BF1120"}
-          onPress={
-            () => {
-              Alert(email)
-              console.log('login pressed')
-            }
-          }
-        >
+        <Button backgroundColor={"#BF1120"} onPress={handleLogin}>
           <Heading color={"white"}>Login</Heading>
         </Button>
 

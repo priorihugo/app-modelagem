@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, Center, Column, Row, Text, Image, Heading } from "native-base";
 import {
   DrawerContentScrollView,
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons/faMoneyBillTransfer";
 import { faPiggyBank } from "@fortawesome/free-solid-svg-icons/faPiggyBank";
 import { faIdCard } from "@fortawesome/free-regular-svg-icons";
+import { AuthContext } from "../../context/authContext";
 
 /*
 <Drawer.Screen name="Principal" component={Home} />
@@ -32,6 +33,7 @@ import { faIdCard } from "@fortawesome/free-regular-svg-icons";
 export function CustomDrawer() {
   const logo = require("../../assets/UFJF-logo.jpg");
   const navigation = useNavigation();
+  const auth = useContext(AuthContext);
   console.log(logo);
   return (
     <Column flex={"1"} backgroundColor={"#261F1D"}>
@@ -125,7 +127,12 @@ export function CustomDrawer() {
             <MaterialIcons name="exit-to-app" color={color} size={size} />
           )}
           onPress={() => {
-            navigation.navigate("Login");
+            try {
+              auth.signout();
+              navigation.navigate("Login");
+            } catch (err) {
+              console.log("sign out err ", err);
+            }
           }}
         />
       </Column>

@@ -1,28 +1,24 @@
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    sendEmailVerification,
-    sendPasswordResetEmail,
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import FirebaseError from "../Error/firebaseError.js";
 
-import { app } from "../connectFirebase.js"
+import { app } from "../connectFirebase.js";
 
 const auth = getAuth(app);
 
 export async function signIn(email, password) {
-    try {
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-        return auth.currentUser;
-    } catch (error) {
-        throw new FirebaseError(error.code);
-    }
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    return auth.currentUser;
+  } catch (error) {
+    throw new FirebaseError(error.code);
+  }
 }
 
 // export async function signInUp(auth, email, password) {
@@ -43,13 +39,8 @@ export async function signIn(email, password) {
 //     }
 // }
 
-export async function signOut(auth) {
-    try {
-        await auth.signOut();
-        return true;
-    } catch (error) {
-        return false;
-    }
+export async function signOut() {
+  await auth.signOut();
 }
 
 // export async function emailVerificationSend(auth, email=null, con=true) {
