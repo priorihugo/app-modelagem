@@ -68,6 +68,7 @@ export default function Login() {
           leftIconName={"lock"}
           name={"password"}
           placeholder={"Insira sua senha"}
+          secureTextEntry={true}
         />
 
         <Divider backgroundColor={"black"} />

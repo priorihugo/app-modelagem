@@ -35,6 +35,7 @@ export function CustomDrawer() {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   console.log(logo);
+  console.log(auth)
   return (
     <Column flex={"1"} backgroundColor={"#261F1D"}>
       <Row my={10} alignItems={"center"} p={4} space={2}>
@@ -118,7 +119,7 @@ export function CustomDrawer() {
       <Column>
         <Row alignItems={"center"} p={4} space={4}>
           <Avatar />
-          <Text color={"white"}>Name placeholder</Text>
+          <Text color={"white"}>{auth?.usuario?.nome}</Text>
         </Row>
         <DrawerItem
           inactiveTintColor="white"

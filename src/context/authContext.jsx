@@ -10,6 +10,8 @@ export default function AuthProvider({ children }) {
 
 
   const realizarLogin = async (email, password) => {
+    email = email.trim()
+    password = password.trim();
     const thisUser = new Usuario();
     await thisUser.realizarLogin(email, password);
 

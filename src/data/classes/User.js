@@ -31,6 +31,8 @@ export default class Usuario {
       // retorna os dados do usuario de acordo com o uid
       getData("users", this.uid).then((data) => {
         let result = data.data();
+
+        console.log('result ' , result)
         // leitura dos dados de cadastro
         this.nome = result.info.name;
         this.email = result.info.email;
@@ -48,7 +50,7 @@ export default class Usuario {
   }
 
   async puxarDados(uid = this.uid) {
-    await getData("users", uid).then((data) => {
+    getData("users", uid).then((data) => {
       let result = data.data();
 
       // leitura dos dados de cadastro

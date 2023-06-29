@@ -3,7 +3,7 @@ import { VStack } from 'native-base';
 import { Controller } from 'react-hook-form';
 import InputField from '../InputField';
 
-export function ControlledInputField({control , errors ,  name , inputLabel , leftIconName , placeholder, content}) {
+export function ControlledInputField({control , errors ,  name , inputLabel , leftIconName , placeholder, content , secureTextEntry}) {
   return (
     <Controller
           control={control}
@@ -17,6 +17,7 @@ export function ControlledInputField({control , errors ,  name , inputLabel , le
                 errorMessage={errors[name]?.message}
                 onChangeText={onChange}
                 content={content}
+                secureTextEntry = {secureTextEntry}
               />
             );
           }}
