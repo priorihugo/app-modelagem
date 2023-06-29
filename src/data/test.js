@@ -2,13 +2,20 @@ import Usuario from "./classes/User.js"
 
 var user = new Usuario()
 
-let uid = "FMOVbF1vZnbEsqPvBpny9J1dcgJ3"
-
 await user.realizarLogin("gustavo.furtado@estudante.ufjf.br", "123456789")
-    .then(() => {
-        console.log(user.email)
+    .then(async () => {
+        let uidDest = await Usuario.buscarUsuarioPorCPF('22233344455')
+        uidDest = uidDest.info.uid
+        console.log("ID destino: " + uidDest) 
+        user.compartilharSaldo(50, uidDest)
     })
 
+let uidDest = await Usuario.buscarUsuarioPorCPF('22233344455')
+uidDest = uidDest.info.uid
+console.log("ID destino: " + uidDest) 
+user.compartilharSaldo(50, uidDest)
+
+//ou  user.puxaDados(uid)
 await user.puxarDados()
     .then(() => {
         console.log("saldo é: " + user.carteirinha.balance)
@@ -16,9 +23,6 @@ await user.puxarDados()
     })
 
 // não permite transações de o saldo for ficar abaixo de 2.80
-
-const trasacoes = ['debito', 'credito', 'transferencia']
-
 await user.registrarTrasacao(-800, 'debito')
     .then(() => {
         console.log("Após adicionar saldo...")
