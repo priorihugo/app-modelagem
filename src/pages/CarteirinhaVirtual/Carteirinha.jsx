@@ -36,7 +36,7 @@ export default function Carteirinha() {
           <Text fontSize={11} color={"red.400"}>
             Nome/Name:
           </Text>
-          <Text fontSize={11}>{auth.usuario.nome}</Text>
+          <Text fontSize={11}>{auth.usuario?.nome}</Text>
           <Text fontSize={11} color={"red.400"}>
             Curso/Program:
           </Text>
@@ -46,7 +46,7 @@ export default function Carteirinha() {
             <Text fontSize={11} color={"red.400"}>
               Matricula/Reg.#:
             </Text>
-            <Text fontSize={11}>{auth.usuario.matricula}</Text>
+            <Text fontSize={11}>{auth.usuario?.matricula}</Text>
 
             <Row justifyContent={"space-between"}>
               <Column>

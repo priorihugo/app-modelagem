@@ -13,6 +13,8 @@ export default class Usuario {
     this.cpf = "";
     this.endereco = "";
     this.telefone = "";
+    this.rg = "";
+    this.curso = "";
     this.dataRegistro = "";
     this.validade = "";
     this.matricula = "";
@@ -24,29 +26,34 @@ export default class Usuario {
 
     console.log("realizar login");
 
-    signIn(username, password).then(async (data) => {
+    try {
+      const data = await signIn(username, password);
       console.log("user data ", data);
       this.uid = data.uid;
       console.log(this.uid);
       // retorna os dados do usuario de acordo com o uid
-      getData("users", this.uid).then((data) => {
-        let result = data.data();
+      const userData = await getData("users", this.uid);
+      let result = userData.data();
 
-        console.log('result ' , result)
-        // leitura dos dados de cadastro
-        this.nome = result.info.name;
-        this.email = result.info.email;
-        this.cpf = result.info.cpf;
-        this.endereco = result.info.address;
-        this.telefone = result.info.phone;
-        this.dataRegistro = result.info.registerDate;
-        this.validade = result.info.validityDate;
-        this.matricula = result.info.matricula;
+      console.log("result ", result);
+      // leitura dos dados de cadastro
+      this.nome = result.info.name;
+      this.email = result.info.email;
+      this.cpf = result.info.cpf;
+      this.endereco = result.info.address;
+      this.telefone = result.info.phone;
+      this.dataRegistro = result.info.registerDate;
+      this.validade = result.info.validityDate;
+      this.matricula = result.info.matricula;
+      this.rg = result.info.rg;
+      this.curso = result.info.course;
 
-        // leitura dos dados da carteira
-        this.carteirinha = result.wallet;
-      });
-    });
+      // leitura dos dados da carteira
+      this.carteirinha = result.wallet;
+    } catch (err) {
+      console.log("user login err ", err);
+      throw err;
+    }
   }
 
   async puxarDados(uid = this.uid) {

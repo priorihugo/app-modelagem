@@ -12,11 +12,18 @@ export default function AuthProvider({ children }) {
   const realizarLogin = async (email, password) => {
     email = email.trim()
     password = password.trim();
-    const thisUser = new Usuario();
-    await thisUser.realizarLogin(email, password);
 
-    console.log("thisUser ", thisUser);
-    setUsuario(thisUser);
+    try{
+        const thisUser = new Usuario();
+        await thisUser.realizarLogin(email, password);
+    
+        console.log("thisUser ", thisUser);
+        setUsuario(thisUser);
+    }catch(err){
+        console.log('realizar login err ' , err)
+        throw err;
+    }
+
   };
 
   const signout = async () => {

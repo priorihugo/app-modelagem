@@ -33,16 +33,17 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (trigger()) {
       const data = getValues();
       console.log("data ", data);
 
       try {
-        auth.realizarLogin(data.email, data.password);
+        await auth.realizarLogin(data.email, data.password);
         navigation.navigate("RotaDrawerHome");
       } catch (err) {
         console.log("handle login err ", err);
+        Alert.alert("Usuario ou senha incorretos")
       }
     }
   };
@@ -92,7 +93,7 @@ export default function Login() {
         <Button
           backgroundColor={"#BF1120"}
           onPress={() => {
-            navigation.navigate("RotaDrawerHome");
+            Alert.alert("ainda não implementado");
           }}
         >
           Cadastre-se
