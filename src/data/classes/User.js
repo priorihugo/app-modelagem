@@ -72,14 +72,17 @@ export default class Usuario {
             })
     }
 
-    async registrarTrasacao(valor, tipo, uid=this.uid) {
-
+    static async registrarTrasacao(valor, tipo, uid=this.uid) {
         try {
-            console.log(this.carteirinha.balance + " é o saldo")
             await this.puxarDados(uid)
+
+            if ((this.carteirinha.balance + valor) < 2.80) return false
+
             let balance = valor + this.carteirinha.balance
-            let idi = this.carteitinha.transaction
-            idi = id.length 
+
+            let idi = this.carteirinha.transactions
+            idi = idi.length != undefined ? idi.length : 0
+
             await updateData("users", uid, {
                 "wallet.balance": balance,
                 "wallet.transactions": arrayUnion({
@@ -89,8 +92,10 @@ export default class Usuario {
                 })
             })
             await this.puxarDados(uid)
+            return true
         } catch (e) {
             console.log(e)
+            return false
         }
     }
 }

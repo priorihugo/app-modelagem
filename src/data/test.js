@@ -15,7 +15,11 @@ await user.puxarDados()
         console.log("historico é: "+ JSON.stringify(user.carteirinha.transactions))
     })
 
-await user.registrarTrasacao(500, 'spdkapw')
+// não permite transações de o saldo for ficar abaixo de 2.80
+
+const trasacoes = ['debito', 'credito', 'transferencia']
+
+await user.registrarTrasacao(-800, 'debito')
     .then(() => {
         console.log("Após adicionar saldo...")
         console.log("Saldo: " + user.carteirinha.balance)
