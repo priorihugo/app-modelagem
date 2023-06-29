@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Alert } from "react-native";
 import {
   Button,
   Center,
@@ -6,7 +7,9 @@ import {
   Column,
   Divider,
   Heading,
+  Modal,
   Row,
+  Spinner,
   Text,
 } from "native-base";
 import { Controller, useForm } from "react-hook-form";
@@ -17,13 +20,44 @@ import { ScrollView } from "native-base";
 import { StyleSheet } from "react-native";
 import logoLogin from "../../assets/UFJF-logo.jpg"; // Importe a imagem corretamente
 
+import Usuario from "../../data/classes/User.js";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { signIn } from "../../data/Auth/login";
+import { AuthContext } from "../../context/authContext";
+
 export default function Login() {
   const navigation = useNavigation();
+
+  const auth = useContext(AuthContext);
+
+  const [isLoading , setIsLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
+    getValues,
+    trigger,
     formState: { errors },
   } = useForm();
+
+  const handleLogin = async () => {
+
+    setIsLoading(true);
+    if (trigger()) {
+      const data = getValues();
+      console.log("data ", data);
+
+      try {
+        await auth.realizarLogin(data.email, data.password);
+        navigation.navigate("RotaDrawerHome");
+      } catch (err) {
+        console.log("handle login err ", err);
+        Alert.alert("Usuario ou senha incorretos")
+      }
+    }
+    setIsLoading(false);
+  };
 
   return (
     <ScrollView>
@@ -44,10 +78,10 @@ export default function Login() {
         <ControlledInputField
           control={control}
           errors={errors}
-          inputLabel={"CPF"}
+          inputLabel={"Email"}
           leftIconName={"person"}
-          name={"cpf"}
-          placeholder={"Insira seu cpf"}
+          name={"email"}
+          placeholder={"Insira seu email"}
         />
 
         <ControlledInputField
@@ -57,21 +91,12 @@ export default function Login() {
           leftIconName={"lock"}
           name={"password"}
           placeholder={"Insira sua senha"}
+          secureTextEntry={true}
         />
 
         <Divider backgroundColor={"black"} />
 
-        <Button
-          backgroundColor={"#BF1120"}
-          borderRadius={300}
-          onPress={
-            //handleSubmit(handleSignUp)
-            () => {
-              console.log('login pressed')
-              navigation.navigate("RotaDrawerHome");
-            }
-          }
-        >
+        <Button backgroundColor={"#BF1120"} onPress={handleLogin}>
           <Heading color={"white"}>Login</Heading>
         </Button>
 
@@ -91,12 +116,16 @@ export default function Login() {
           backgroundColor={"#BF1120"}
           borderRadius={300}
           onPress={() => {
-            navigation.navigate("RotaDrawerHome");
+            Alert.alert("ainda não implementado");
           }}
         >
           Cadastre-se
         </Button>
       </Column>
+
+      <Modal isOpen ={isLoading} onClose={setIsLoading} backgroundColor={'transparent'} opacity={95}   >
+        <Spinner size={'lg'}/>
+      </Modal>
     </Center>
     </ScrollView>
   );

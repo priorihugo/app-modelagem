@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Center, Column, Divider, Heading, Image, Row, Text } from "native-base";
+import { AuthContext } from "../../context/authContext";
 
 export default function Carteirinha() {
   const placeholder = require("../../assets/profile-placeholder.jpg");
   const logo = require("../../assets/UFJF-logo.jpg");
+
+  const auth = useContext(AuthContext);
 
   return (
     <Column borderRadius={7} backgroundColor={"gray.200"} w={"90%"}>
@@ -33,39 +36,39 @@ export default function Carteirinha() {
           <Text fontSize={11} color={"red.400"}>
             Nome/Name:
           </Text>
-          <Text fontSize={11}>Zezinho</Text>
+          <Text fontSize={11}>{auth.usuario?.nome}</Text>
           <Text fontSize={11} color={"red.400"}>
             Curso/Program:
           </Text>
-          <Text fontSize={11}>Sistemas de informação</Text>
+          <Text fontSize={11}>{auth.usuario?.curso}</Text>
 
           <Column w={"100%"}>
             <Text fontSize={11} color={"red.400"}>
               Matricula/Reg.#:
             </Text>
-            <Text fontSize={11}>202011111</Text>
+            <Text fontSize={11}>{auth.usuario?.matricula}</Text>
 
             <Row justifyContent={"space-between"}>
               <Column>
                 <Text fontSize={11} color={"red.400"}>
                   CPF:
                 </Text>
-                <Text fontSize={11}>111.222.333-44</Text>
+                <Text fontSize={11}>{auth.usuario?.cpf}</Text>
               </Column>
 
               <Column>
                 <Text fontSize={11} color={"red.400"}>
                   Identidade/ID:
                 </Text>
-                <Text fontSize={11}>123456789</Text>
+                <Text fontSize={11}>{auth.usuario?.rg}</Text>
               </Column>
             </Row>
           </Column>
         </Column>
       </Row>
 
-      <Text>QRCode</Text>
-      <Divider />
+      
+     
     </Column>
   );
 }

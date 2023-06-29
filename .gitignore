@@ -53,3 +53,7 @@ yarn-error.log
 .expo/
 web-build/
 dist/
+
+# fastlane
+yarn.lock
+package-lock.json
