@@ -108,7 +108,7 @@ export default function Login() {
       </Column>
 
       <Modal isOpen ={isLoading} onClose={setIsLoading} backgroundColor={'transparent'} opacity={95}   >
-        <Spinner/>
+        <Spinner size={'lg'}/>
       </Modal>
     </Center>
   );
