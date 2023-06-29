@@ -6,20 +6,7 @@ import { arrayUnion } from "firebase/firestore";
 import { isAsyncMode } from "react-is";
 
 export default class Usuario {
-  constructor() {
-    this.uid = "";
-    this.nome = "";
-    this.email = "";
-    this.cpf = "";
-    this.endereco = "";
-    this.telefone = "";
-    this.rg = "";
-    this.curso = "";
-    this.dataRegistro = "";
-    this.validade = "";
-    this.matricula = "";
-    this.carteirinha = null;
-  }
+  constructor() {}
 
   async realizarLogin(username, password) {
     // TODO: realiza login
@@ -102,6 +89,8 @@ export default class Usuario {
     }
   }
 
+  /*
+
   async compartilharSaldo(valor, uidDestino, uid = this.uid) {
     try {
       await this.puxarDados(uid);
@@ -124,18 +113,19 @@ export default class Usuario {
     }
   }
 
+  */
+
   static async buscarUsuarioPorCPF(cpf) {
     // TODO: buscar usuario por cpf no firebase
     try {
       var dataResult;
-      await conditionalGetData("users", "info.cpf", cpf).then(async (data) => {
-        dataResult = data.docs[0].data();
-        return;
-      });
+      const data = await conditionalGetData("users", "info.cpf", cpf);
+      dataResult = data.docs[0].data();
+
       return dataResult;
     } catch (e) {
       console.log(e);
-      return false;
+      throw e;
     }
   }
 }

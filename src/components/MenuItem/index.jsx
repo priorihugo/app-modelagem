@@ -8,6 +8,7 @@ export default function MenuItem({
   Icon = undefined,
   label,
   goTo,
+  onPress = undefined,
   boxSize = 24,
   buttonColor = "black",
   iconColor = "white",
@@ -31,7 +32,7 @@ export default function MenuItem({
             />
           )
         }
-        onPress={() => navigation.navigate(goTo)}
+        onPress={() => onPress? onPress() : navigation.navigate(goTo)}
       />
       <Text
         textAlign={"center"}

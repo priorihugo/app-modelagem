@@ -96,7 +96,7 @@ export default function Login() {
 
         <Divider backgroundColor={"black"} />
 
-        <Button backgroundColor={"#BF1120"} onPress={handleLogin}>
+        <Button backgroundColor={"#BF1120"} onPress={handleLogin}  borderRadius={300} >
           <Heading color={"white"}>Login</Heading>
         </Button>
 
