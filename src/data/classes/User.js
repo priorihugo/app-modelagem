@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { signIn } from "../Auth/login.js"
-import { getData } from "../Store/userData.js"
+import { getData, updateData, arrIncrement } from "../Store/userData.js"
+import { arrayUnion } from "firebase/firestore"
 
 export default class Usuario {
 
@@ -69,5 +70,27 @@ export default class Usuario {
 
                 return
             })
+    }
+
+    async registrarTrasacao(valor, tipo, uid=this.uid) {
+
+        try {
+            console.log(this.carteirinha.balance + " é o saldo")
+            await this.puxarDados(uid)
+            let balance = valor + this.carteirinha.balance
+            let idi = this.carteitinha.transaction
+            idi = id.length 
+            await updateData("users", uid, {
+                "wallet.balance": balance,
+                "wallet.transactions": arrayUnion({
+                    id: idi,
+                    type: tipo,
+                    value: valor
+                })
+            })
+            await this.puxarDados(uid)
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
