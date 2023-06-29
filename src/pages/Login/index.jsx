@@ -7,7 +7,9 @@ import {
   Column,
   Divider,
   Heading,
+  Modal,
   Row,
+  Spinner,
   Text,
 } from "native-base";
 import { Controller, useForm } from "react-hook-form";
@@ -25,6 +27,8 @@ export default function Login() {
 
   const auth = useContext(AuthContext);
 
+  const [isLoading , setIsLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -34,6 +38,8 @@ export default function Login() {
   } = useForm();
 
   const handleLogin = async () => {
+
+    setIsLoading(true);
     if (trigger()) {
       const data = getValues();
       console.log("data ", data);
@@ -46,6 +52,7 @@ export default function Login() {
         Alert.alert("Usuario ou senha incorretos")
       }
     }
+    setIsLoading(false);
   };
 
   return (
@@ -99,6 +106,10 @@ export default function Login() {
           Cadastre-se
         </Button>
       </Column>
+
+      <Modal isOpen ={isLoading} onClose={setIsLoading} backgroundColor={'transparent'} opacity={95}   >
+        <Spinner/>
+      </Modal>
     </Center>
   );
 }
