@@ -1,4 +1,4 @@
-import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion} from "firebase/firestore";
+import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion, query, where, getDocs, collection} from "firebase/firestore";
 
 import { app } from "../connectFirebase.js";
 
@@ -18,4 +18,9 @@ export async function setData(collection, id, data) {
 
 export async function arrIncrement(dataI) {
     return arrayUnion(dataI)
+}
+
+export async function conditionalGetData(collectionRef, field, value) {
+    const queryData = query(collection(db, collectionRef),  where(field, "==", value));
+    return await getDocs(queryData);
 }

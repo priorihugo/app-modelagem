@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { signIn } from "../Auth/login.js"
-import { getData, updateData, arrIncrement } from "../Store/userData.js"
+import { getData, updateData, conditionalGetData } from "../Store/userData.js"
 import { arrayUnion } from "firebase/firestore"
+import { isAsyncMode } from "react-is"
 
 export default class Usuario {
 
@@ -25,7 +26,7 @@ export default class Usuario {
             await signIn(username, password)
                 .then(async data => {
                     this.uid = data.uid
-                    console.log(this.uid)
+                    console.log("Login realizado. ID: " + this.uid)
                     // retorna os dados do usuario de acordo com o uid
                     await getData("users", this.uid)
                         .then(data => {
@@ -68,11 +69,11 @@ export default class Usuario {
                 // leitura dos dados da carteira
                 this.carteirinha = result.wallet
 
-                return
+                return 
             })
     }
 
-    static async registrarTrasacao(valor, tipo, uid=this.uid) {
+    async registrarTrasacao(valor, tipo, uid=this.uid) {
         try {
             await this.puxarDados(uid)
 
@@ -93,6 +94,43 @@ export default class Usuario {
             })
             await this.puxarDados(uid)
             return true
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    async compartilharSaldo(valor, uidDestino, uid=this.uid) {
+        try {
+            await this.puxarDados(uid)
+            if (this.carteirinha.balance < valor) return false
+            await this.registrarTrasacao(-valor, "transferencia", uid)
+                .then(async result => {
+                    if (result) {
+                        let user2 = new Usuario()
+                        await user2.puxarDados(uidDestino)
+                        await user2.registrarTrasacao(valor, "transferencia", uidDestino)
+                        return true
+                    }
+                    return false
+                })
+            return false
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    static async buscarUsuarioPorCPF(cpf) {
+        // TODO: buscar usuario por cpf no firebase
+        try {
+            var dataResult
+            await conditionalGetData('users', 'info.cpf', cpf)
+                .then(async data => {
+                    dataResult = data.docs[0].data()
+                    return
+                })
+            return dataResult
         } catch (e) {
             console.log(e)
             return false
