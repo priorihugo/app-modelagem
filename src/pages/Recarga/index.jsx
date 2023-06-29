@@ -31,6 +31,7 @@ export default function Recarga() {
             />
           }
           iconName={"credit-card"}
+          goTo={"Tranferencia"}
           boxSize={20}
           buttonColor="#BF1120"
         />

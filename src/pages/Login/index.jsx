@@ -12,6 +12,10 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { ControlledInputField } from "../../components/ControlledInputField";
+import { Image } from "react-native"
+import { ScrollView } from "native-base";
+import { StyleSheet } from "react-native";
+import logoLogin from "../../assets/UFJF-logo.jpg"; // Importe a imagem corretamente
 
 export default function Login() {
   const navigation = useNavigation();
@@ -22,9 +26,20 @@ export default function Login() {
   } = useForm();
 
   return (
+    <ScrollView>
     <Center height={"full"} width="full" backgroundColor={"#F2F2F2"}>
       <Column width={"4/5"} space={4}>
-        <Heading color={'#BF1120'} >Entrar</Heading>
+        <Image 
+          source={logoLogin}
+          style={{
+            marginTop: 25,
+            width: 139,
+            height: 127,
+            borderRadius: 41,
+            alignSelf: 'center',
+          }}
+        />
+        <Heading color={'#BF1120'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}>Entrar</Heading>
 
         <ControlledInputField
           control={control}
@@ -48,6 +63,7 @@ export default function Login() {
 
         <Button
           backgroundColor={"#BF1120"}
+          borderRadius={300}
           onPress={
             //handleSubmit(handleSignUp)
             () => {
@@ -73,6 +89,7 @@ export default function Login() {
         </Text>
         <Button
           backgroundColor={"#BF1120"}
+          borderRadius={300}
           onPress={() => {
             navigation.navigate("RotaDrawerHome");
           }}
@@ -81,5 +98,6 @@ export default function Login() {
         </Button>
       </Column>
     </Center>
+    </ScrollView>
   );
 }

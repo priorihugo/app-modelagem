@@ -1,40 +1,60 @@
 import React from "react";
-import { Center, Column, Divider, Heading, Row, Text, VStack } from "native-base";
+import { Center, Column, Divider, Heading, Row, ScrollView, Text, VStack } from "native-base";
+import { Image } from "native-base";
+import RUCampus from "../../assets/movimentoCampus.jpg"
+import RUCentro from "../../assets/image-4.png"
+import { FitScreen } from "@mui/icons-material";
 
 export default function Informacoes() {
   return (
+    <ScrollView>
     <Center flex={"1"} backgroundColor={'#F2F2F2'}>
-
-      <Row w={'90%'} justifyContent={'space-between'}>
-      <Text>Movimentação</Text>
+      <Row w={'90%'} justifyContent={'space-between'} marginTop={15}>
+      <Heading color={'red.700'}>Movimentação</Heading>
       <Column>
-      <Text>Atualizado as :</Text>
-      <Text>11/11/11 as 11:32h</Text>
+      <Text>Atualizado em :</Text>
+      <Text>11/11/11 às 12:35h</Text>
       </Column>
 
       </Row>
 
       <Divider />
 
-      <Column w={"90%"}>
-        <Heading>RU Campus</Heading>
+      <Column w={"90%"} paddingLeft={15} paddingRight={15}>
+        <Heading marginTop={50} color={'red.700'}>RU Campus</Heading>
 
-        <Center borderWidth={1} borderRadius={4} borderColor={"black"}>
-          Status
+        <Center marginTop={5} marginBottom={2} borderWidth={1} borderRadius={200} borderColor={"#CFDEE7"} py={2} backgroundColor={"#CFDEE7"} >
+          <Text color={"#1C1D21"} fontWeight={"bold"} fontSize={20}>CHEIO</Text>
         </Center>
 
-        <Text>Aqui entra uma imagem</Text>
+        <Image
+          source={RUCampus}
+          style={{
+            width: 400,
+            height: 130,
+            resizeMode: "contain",
+            alignSelf: 'center',
+          }}
+        />
 
         <Divider />
+        <Heading marginTop={50} color={'red.700'}>RU Centro</Heading>
 
-        <Heading>RU Centro</Heading>
-
-        <Center borderWidth={1} borderRadius={4} borderColor={"black"}>
-          Status
+        <Center marginTop={5} marginBottom={2} borderWidth={1} borderRadius={200} borderColor={"#CFDEE7"} py={2} backgroundColor={"#CFDEE7"} >
+          <Text color={"#1C1D21"} fontWeight={"bold"} fontSize={20}>MODERADO</Text>
         </Center>
 
-        <Text>Aqui entra uma imagem</Text>
+        <Image
+          source={RUCentro}
+          style={{
+            width: 400,
+            height: 130,
+            resizeMode: "contain",
+            alignSelf: 'center',
+          }}
+        />
       </Column>
     </Center>
+    </ScrollView>
   );
 }
