@@ -27,6 +27,8 @@ export default function InputField({
 
       <Input
         placeholderTextColor={"black"}
+        borderRadius={300}
+        backgroundColor={"#CFDEE7"}
         borderColor="SECUNDARIO.1"
         InputLeftElement={
           iconName == null || "" ? null : (
