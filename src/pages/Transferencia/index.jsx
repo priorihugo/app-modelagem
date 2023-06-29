@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Center, Column, Divider, Row, Text, VStack } from "native-base";
 import { ControlledInputField } from "../../components/ControlledInputField";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/authContext";
 
 export default function Transferencia() {
+  const auth = useContext(AuthContext);
   const {
     control,
     handleSubmit,
@@ -17,15 +19,15 @@ export default function Transferencia() {
         <Divider my={1} />
         <Row mx={4} justifyContent={"space-between"}>
           <Text>Nome:</Text>
-          <Text>Nome-Placeholder</Text>
+          <Text>{auth.usuario?.nome}</Text>
         </Row>
         <Row mx={4} justifyContent={"space-between"}>
           <Text>CPF:</Text>
-          <Text>CPF-Placeholder</Text>
+          <Text>{auth.usuario?.cpf}</Text>
         </Row>
         <Row mx={4} justifyContent={"space-between"}>
           <Text>Saldo Atual</Text>
-          <Text>Saldo-Placeholder</Text>
+          <Text>{auth.usuario?.saldo}</Text>
         </Row>
         <Divider my={1}/>
       </Column>

@@ -24,10 +24,10 @@ export function Noticia({ item }) {
       p={2}
     >
       <Center h={"100%"} backgroundColor={"black"}>
-        <Image size={"lg"} resizeMode="contain" src={item.image} />
+        <Image size={"lg"} resizeMode="contain" source={item.image} />
       </Center>
       <Column p={1}>
-        <Heading>Tag da Noticia</Heading>
+        <Heading>{item.tag}</Heading>
         <Divider />
         <Text>{item.title}</Text>
       </Column>

@@ -13,15 +13,18 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
 import { Noticia } from "./Noticia";
+import logoUfjf from "../../assets/placeholder.jpg"
 
 const data = [
   {
-    title: "titulo placehodler 1",
-    image: null,
+    tag: "Surpresinha",
+    title: "Pedra encontrada no ru",
+    image: logoUfjf,
   },
   {
-    title: "titulo placehodler 2",
-    image: null,
+    tag: "Carne de Esquilo",
+    title: "Nova especiaria do RU",
+    image: logoUfjf,
   },
   {
     title: "titulo placehodler 3",
@@ -41,8 +44,8 @@ export function Noticias() {
   const winSize = useWindowDimensions();
 
   return (
-    <Flex flex={"1"} px={4}>
-      <Heading>Notícias</Heading>
+    <Flex flex={"1"} px={8}>
+      <Heading marginBottom={4}>Notícias</Heading>
       <FlatList
         maxH={40}
         pagingEnabled={true}

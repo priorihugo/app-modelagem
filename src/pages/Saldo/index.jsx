@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   Center,
   Column,
@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "native-base";
+import { AuthContext } from "../../context/authContext";
 
 const data = [
   {
@@ -45,14 +46,14 @@ const data = [
 ];
 
 export default function Saldo() {
-  const saldo = "100";
+  const auth = useContext(AuthContext);
 
   return (
     <Center flex={"1"} flexDirection={"column"} backgroundColor={"#F2F2F2"}>
       <Divider />
       <Heading>Seu saldo</Heading>
       <Center w={"80%"} borderWidth={1} borderRadius={4} borderColor={"black"}>
-        <Text>R${saldo}</Text>
+        <Text>R${auth.usuario?.saldo}</Text>
       </Center>
       <Divider my={4}/>
 

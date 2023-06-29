@@ -8,6 +8,7 @@ import { isAsyncMode } from "react-is";
 export default class Usuario {
   constructor() {
     this.uid = "";
+    this.saldo=  "";
     this.nome = "";
     this.email = "";
     this.cpf = "";
@@ -50,6 +51,7 @@ export default class Usuario {
 
       // leitura dos dados da carteira
       this.carteirinha = result.wallet;
+      this.saldo = result.wallet.balance;
     } catch (err) {
       console.log("user login err ", err);
       throw err;
