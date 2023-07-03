@@ -36,13 +36,13 @@ export default function Transferencia() {
 
   useFocusEffect(
     useCallback(() => {
+      console.log('Transferencia')
+      setIsLoading(true)
       const update = async () => {
         await auth.updateCarteirinha();
+        setIsLoading(false)
       };
       update();
-
-      console.log("carteirinha ", auth.carteirinha);
-
       setIsLoading(false);
     }, [rl])
   );

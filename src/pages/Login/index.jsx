@@ -46,8 +46,6 @@ export default function Login() {
     setIsLoading(true);
     if (trigger()) {
       const data = getValues();
-      console.log("data ", data);
-
       try {
         await auth.realizarLogin(data.email, data.password);
         navigation.navigate("RotaDrawerHome");

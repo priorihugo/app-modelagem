@@ -32,6 +32,10 @@ export default function Saldo() {
 
   useFocusEffect(
     useCallback(() => {
+
+      console.log('Saldo')
+      setIsLoading(true)
+
       const update = async () => {
         await auth.updateCarteirinha();
         setIsLoading(false);
@@ -39,7 +43,7 @@ export default function Saldo() {
       update();
 
       console.log("carteirinha ", auth.carteirinha);
-    })
+    },[])
   );
 
   return (

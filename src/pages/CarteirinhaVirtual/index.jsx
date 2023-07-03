@@ -6,6 +6,7 @@ import QRCodeCarteirinha from "./Qrcode";
 import Catraca from "../../data/classes/Catraca";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import { Alert } from "react-native";
 
 export default function CarteirinhaVirtual() {
   const { usuario } = useContext(AuthContext);
@@ -18,6 +19,7 @@ export default function CarteirinhaVirtual() {
         flex={"1"}
         onPress={() => {
           Catraca.debitarUsuario(usuario.matricula);
+          Alert.alert('Teste debitar credito ')
         }}
       >
         <QRCodeCarteirinha />

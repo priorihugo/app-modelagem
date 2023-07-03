@@ -31,6 +31,7 @@ export default function InputField({
         borderRadius={300}
         backgroundColor={"#CFDEE7"}
         borderColor="SECUNDARIO.1"
+        
         InputLeftElement={
           iconName == null || "" ? null : (
             <Icon as={<MaterialIcons name={iconName} />} ml={2} />

@@ -34,8 +34,6 @@ export function CustomDrawer() {
   const logo = require("../../assets/UFJF-logo.jpg");
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
-  console.log(logo);
-  console.log(auth);
   return (
     <Column flex={"1"} backgroundColor={"#261F1D"}>
       <Row my={10} alignItems={"center"} p={4} space={2}>

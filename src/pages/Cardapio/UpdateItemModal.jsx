@@ -26,8 +26,6 @@ export function UpdateItemModal({ notify, setNotify, type, cardapio , reload }) 
 
   const [foto, setFoto] = useState(undefined);
 
-  console.log("foto ", foto);
-
   const {
     control,
     handleSubmit,
@@ -44,9 +42,6 @@ export function UpdateItemModal({ notify, setNotify, type, cardapio , reload }) 
       base64: true,
       quality: 1,
     });
-
-    console.log("image picker ", result);
-
     if (!result.canceled) {
       //state tem as info de base64 e uri
       setFoto(result.assets[0]);

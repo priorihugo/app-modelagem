@@ -14,15 +14,11 @@ export default function AuthProvider({ children }) {
 
   const updateCarteirinha = async () => {
     try {
-      /*
       const dados = await getData("users", usuario.uid);
       const result = dados.data();
       console.log(" updateCarteirinha thisUser ", result);
       const thisCarteirinha = new Carteirinha(result);
-      */
-      await usuario.puxarDados();
-      console('update carteirinha usuario ' , usuario)
-      setCarteirinha(usuario.getCarteirinha());
+      setCarteirinha(thisCarteirinha);
     } catch (err) {
       console.log("update carteirinha err ", err);
     }

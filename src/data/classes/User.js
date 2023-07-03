@@ -47,10 +47,11 @@ export default class Usuario {
 
   async puxarDados(uid = this.uid) {
     const data = await getData("users", uid);
-    let result = data.data();
+    let result = await data.data();
 
-    console.log('puxar dados result ')
+    console.log('puxar dados result ' , result)
     // leitura dos dados de cadastro
+    this.uid = result?.info.uid
     this.nome = result?.info.name;
     this.email = result?.info.email;
     this.cpf = result?.info.cpf;

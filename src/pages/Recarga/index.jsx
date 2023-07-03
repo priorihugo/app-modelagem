@@ -21,16 +21,13 @@ export default function Recarga() {
 
   useFocusEffect(
     useCallback(() => {
+      console.log('Recarga')
       const update = async () => {
         await auth.updateCarteirinha();
       };
       update();
-
-      console.log("carteirinha ", auth.carteirinha);
     }, [])
   );
-
-
 
   const auth = useContext(AuthContext);
 

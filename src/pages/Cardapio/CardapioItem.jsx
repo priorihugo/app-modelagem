@@ -109,7 +109,6 @@ export function CardapioItem({
             <MaterialIcons
               name={"edit"}
               onPress={() => {
-                console.log("press");
                 setNotify(true);
               }}
             />

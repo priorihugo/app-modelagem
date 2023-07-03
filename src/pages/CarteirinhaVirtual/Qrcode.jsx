@@ -25,7 +25,6 @@ export default function QRCodeCarteirinha() {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'red',
       width: '100%',
     },
   });
