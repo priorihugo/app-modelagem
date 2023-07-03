@@ -5,16 +5,20 @@ import { isAsyncMode } from "react-is";
 import Usuario from "./User";
 
 export default class Carteirinha {
-  constructor({ uid_usuario, saldo, historico  , nome , cpf}) {
-    this.uid_usuario = uid_usuario;
-    this.saldo = Number(saldo);
-    this.historico = historico;
-    this.user_name = nome
-    this.user_cpf = cpf
+  constructor(result) {
+    console.log("Carteirinha constructor result ", result);
+
+    const carteirinha = result?.wallet;
+    this.user_name = result?.info.name;
+    this.user_cpf = result?.info.cpf;
+    this.saldo = Number(carteirinha?.balance);
+    this.historico = carteirinha?.transactions;
+    this.uid_usuario = result?.uid;
   }
 
   async debitarSaldo(valor, tipo, destinoNome, destinoCPF = "") {
-    await this.updateDados();
+    await this.updateCarteirinha();
+
     if (this.saldo - valor < -2.8) {
       throw "Saldo insufuciente";
     } else {
@@ -30,33 +34,30 @@ export default class Carteirinha {
         "wallet.transactions": arrayUnion({
           id: idi,
           type: tipo,
-          value: -valor,
+          value: -1 * Number(valor),
           date: utc_date,
           source: destinoNome,
           sourceCPF: destinoCPF,
         }),
       });
-      await this.updateDados();
+      await this.updateCarteirinha();
     }
   }
 
-  async updateDados(uid = this.uid_usuario) {
-    getData("users", uid).then((data) => {
-      let result = data.data();
-      // leitura dos dados da carteira
-      const carteirinha = result.wallet;
-
-      this.user_name = result.info.name
-      this.user_cpf = result.info.cpf
-      this.saldo = carteirinha.balance;
-      this.historico = carteirinha.transaction;
-      this.uid_usuario = result.uid;
-    });
+  async updateCarteirinha(uid = this.uid_usuario) {
+    const data = await getData("users", uid);
+    let result = data.data();
+    const carteirinha = result.wallet;
+    this.user_name = result.info.name;
+    this.user_cpf = result.info.cpf;
+    this.saldo = Number(carteirinha.balance);
+    this.historico = carteirinha.transactions;
+    this.uid_usuario = result.uid;
   }
 
   async adicionarSaldo(valor, tipo, origemNome, origemCPF = "") {
-    await this.updateDados();
-    this.saldo = this.saldo + valor;
+    await this.updateCarteirinha();
+    this.saldo = Number(this.saldo) + Number(valor);
     const utc_date = new Date().toUTCString();
 
     let idi = this.historico;
@@ -67,14 +68,14 @@ export default class Carteirinha {
       "wallet.transactions": arrayUnion({
         id: idi,
         type: tipo,
-        value: valor,
+        value: Number(valor),
         date: utc_date,
         source: origemNome,
         sourceCPF: origemCPF,
       }),
     });
 
-    await this.updateDados();
+    await this.updateCarteirinha();
   }
 
   async compartilharSaldo(cpfDest, valor) {
@@ -83,32 +84,33 @@ export default class Carteirinha {
       throw "valor invalido";
     }
 
-    const userDest = await Usuario.buscarUsuarioPorCPF(cpfDest);
+    try {
+      const userDest = await Usuario.buscarUsuarioPorCPF(cpfDest);
+      console.log("user dest ", userDest);
 
-    console.log("user dest ", userDest);
+      const testUser = new Usuario(userDest);
 
-    this.debitarSaldo(valor , 'Transferencia a usuario' , userDest.info.nome , userDest.info.cpf)
+      console.log("test user ", testUser);
 
-    let idi = userDest.wallet.transactions;
-    idi = idi.length != undefined ? idi.length : 0;
+      this.debitarSaldo(
+        valor,
+        "Transferencia a usuario",
+        testUser.nome,
+        testUser.cpf
+      );
 
-    const utc_date = new Date().toUTCString();
-
-    await updateData("users", userDest.info.uid, {
-        "wallet.balance": Number(userDest.wallet.balance) + Number(valor),
-        "wallet.transactions": arrayUnion({
-          id: idi,
-          type: "Transferencia a usuario",
-          value: valor,
-          date: utc_date,
-          source: this.user_name,
-          sourceCPF: this.user_cpf,
-        }),
-      });
-
-
+      await testUser
+        .getCarteirinha()
+        .adicionarSaldo(
+          valor,
+          "Transferencia de usuario",
+          this.user_name,
+          this.user_cpf
+        );
+    } catch (err) {
+      throw "Usuario não encontrado";
+    }
   }
-
   async consultarSaldo() {
     return this.saldo;
   }

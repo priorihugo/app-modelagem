@@ -5,11 +5,10 @@
 export default class Restaurante {
 
     constructor(){
-
-        this.maxCapacity = '';
-        this.atualCapacity = '';
-        this.historicoMovimento = '';
-        this.cardapio = ''
+        this.maxCapacity = undefined;
+        this.atualCapacity = undefined;
+        this.historicoMovimento = undefined;
+        this.cardapio = undefined;
     }
 
     async registrarCapacidade(capacidadeAtual){

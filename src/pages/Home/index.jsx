@@ -30,7 +30,10 @@ export default function Home() {
         animate={{
           opacity: 1,
           translateX: 0,
+
         }}
+        
+        
       >
         <Noticias />
 

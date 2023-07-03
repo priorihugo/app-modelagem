@@ -7,7 +7,7 @@ export default class Prato {
     this.totalAvaliacao = 0;
   }
 
-  async RegistrarAvaliacao(){
+  async RegistrarAvaliacao({valor}){
 
   }
 }

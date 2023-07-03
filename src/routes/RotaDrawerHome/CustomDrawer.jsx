@@ -35,7 +35,7 @@ export function CustomDrawer() {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   console.log(logo);
-  console.log(auth)
+  console.log(auth);
   return (
     <Column flex={"1"} backgroundColor={"#261F1D"}>
       <Row my={10} alignItems={"center"} p={4} space={2}>
@@ -118,9 +118,18 @@ export function CustomDrawer() {
 
       <Column>
         <Row alignItems={"center"} p={4} space={4}>
-          <Avatar />
-          <Text color={"white"}>{auth?.usuario?.nome}</Text>
+          <Avatar source={{ uri: auth?.usuario.foto }} />
+
+          <Column>
+            <Text color={"white"}>{auth?.usuario?.nome}</Text>
+            {auth.usuario.isAdmin ? (
+              <Text color={"white"}>Administrador</Text>
+            ) : (
+              <Text color={"white"}>Usuario</Text>
+            )}
+          </Column>
         </Row>
+
         <DrawerItem
           inactiveTintColor="white"
           label={"Sair"}

@@ -38,6 +38,8 @@ export default function Recarga() {
     const data = getValues();
 
     try {
+
+      //async adicionarSaldo(valor, tipo, origemNome, origemCPF = "") {
       auth.carteirinha.adicionarSaldo(data.amount, tipo, origem , '');
       Alert.alert("Recarga realizada com sucesso")
     } catch (err) {
@@ -65,7 +67,7 @@ export default function Recarga() {
           boxSize={20}
           buttonColor="#BF1120"
           onPress={() => {
-            handleConfirm("Pix", "Pix");
+            handleConfirm("Pix", "Recarga");
           }}
         />
         <MenuItem
@@ -74,7 +76,7 @@ export default function Recarga() {
           boxSize={20}
           buttonColor="#BF1120"
           onPress={() => {
-            handleConfirm("Credito", "Credito");
+            handleConfirm("Credito", "Recarga");
           }}
         />
         <MenuItem
@@ -90,7 +92,7 @@ export default function Recarga() {
           boxSize={20}
           buttonColor="#BF1120"
           onPress={() => {
-            handleConfirm("Transferencia Bancaria", "Transferencia Bancaria");
+            handleConfirm("Transferencia Bancaria", "Recarga");
           }}
         />
       </Center>

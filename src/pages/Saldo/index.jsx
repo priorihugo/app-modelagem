@@ -13,40 +13,17 @@ import {
 import { AuthContext } from "../../context/authContext";
 import { useFocusEffect } from "@react-navigation/core";
 
-const data = [
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: 100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: 100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-  {
-    date: "11/11/11 - 11:11h",
-    amount: -100,
-  },
-];
+const getLocalDate = (utcDate) => {
+  if (!utcDate) {
+    return "";
+  }
+  const localDate = new Date(utcDate).toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    dateStyle: "medium",
+  });
+  return localDate;
+}
+
 
 export default function Saldo() {
   const auth = useContext(AuthContext);
@@ -62,7 +39,7 @@ export default function Saldo() {
       update();
 
       console.log("carteirinha ", auth.carteirinha);
-    }, [])
+    })
   );
 
   return (
@@ -120,10 +97,7 @@ export default function Saldo() {
 
                     <Text>
                       Data:
-                      {item?.date.toLocaleString("pt-BR", {
-                        timeZone: "America/Sao_Paulo",
-                        dateStyle: "medium",
-                      })}
+                      {getLocalDate(item?.date)}
                     </Text>
                   </Row>
 
@@ -135,9 +109,9 @@ export default function Saldo() {
                     py={2}
                     backgroundColor={"#CFDEE7"}
                   >
-                    {item?.value < 0 ? (
+                    {Number(item?.value) < 0 ? (
                       <Text color={"red.400"} fontWeight={"bold"} fontSize={16}>
-                        -R${item?.value * -1}
+                        -R${Number(item?.value).toFixed(2) * -1}
                       </Text>
                     ) : (
                       <Text
@@ -145,7 +119,7 @@ export default function Saldo() {
                         fontWeight={"bold"}
                         fontSize={16}
                       >
-                        R${item?.value}
+                        R${Number(item?.value).toFixed(2)}
                       </Text>
                     )}
                   </Center>

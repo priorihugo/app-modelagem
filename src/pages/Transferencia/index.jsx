@@ -7,12 +7,14 @@ import {
   Row,
   Text,
   VStack,
+  Spinner,
 } from "native-base";
 import { ControlledInputField } from "../../components/ControlledInputField";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../context/authContext";
 import { useFocusEffect } from "@react-navigation/core";
 import { Alert } from "react-native";
+import { useState } from "react";
 
 export default function Transferencia() {
   const {
@@ -25,6 +27,13 @@ export default function Transferencia() {
 
   const auth = useContext(AuthContext);
 
+  const [rl, setRL] = useState(false);
+  const [isLoading , setIsLoading] = useState(true)
+
+  const reload = () => {
+    setRL(!rl);
+  };
+
   useFocusEffect(
     useCallback(() => {
       const update = async () => {
@@ -33,38 +42,54 @@ export default function Transferencia() {
       update();
 
       console.log("carteirinha ", auth.carteirinha);
-    }, [])
+
+      setIsLoading(false);
+    }, [rl])
   );
 
   const handleConfirm = async () => {
     const data = getValues();
 
     try {
-      auth.carteirinha.compartilharSaldo("11122233344", data.valor);
-    } catch {
-      Alert.alert("Operação n concluida");
+      //11122233344
+      auth.carteirinha.compartilharSaldo(data.cpf, data.valor);
+    } catch (err) {
+      if (err === "Usuario não encontrado") {
+        Alert.alert("Usuario não encontrado");
+      }
+      Alert.alert("Operação não concluida");
     }
+
+    reload();
   };
 
   return (
     <Center flex={"1"} backgroundColor={"#F2F2F2"}>
-      <Column w={"90%"}>
-        <Text>Origem</Text>
-        <Divider my={1} />
-        <Row mx={4} justifyContent={"space-between"}>
-          <Text>Nome:</Text>
-          <Text>{auth.usuario.nome}</Text>
-        </Row>
-        <Row mx={4} justifyContent={"space-between"}>
-          <Text>CPF:</Text>
-          <Text>{auth.usuario.cpf}</Text>
-        </Row>
-        <Row mx={4} justifyContent={"space-between"}>
-          <Text>Saldo Atual</Text>
-          <Text>{auth.carteirinha.saldo}</Text>
-        </Row>
-        <Divider my={1} />
-      </Column>
+      {isLoading ? (
+        <Center flex={'1'}>
+          <Spinner />
+        </Center>
+      ) : (
+        <>
+          <Column w={"90%"}>
+            <Text>Origem</Text>
+            <Divider my={1} />
+            <Row mx={4} justifyContent={"space-between"}>
+              <Text>Nome:</Text>
+              <Text>{auth.usuario.nome}</Text>
+            </Row>
+            <Row mx={4} justifyContent={"space-between"}>
+              <Text>CPF:</Text>
+              <Text>{auth.usuario.cpf}</Text>
+            </Row>
+            <Row mx={4} justifyContent={"space-between"}>
+              <Text>Saldo Atual</Text>
+              <Text>{auth.carteirinha.saldo}</Text>
+            </Row>
+            <Divider my={1} />
+          </Column>
+        </>
+      )}
 
       <Column w={"90%"}>
         <Text>Destino</Text>
@@ -88,7 +113,12 @@ export default function Transferencia() {
         />
       </Column>
 
-      <Button w={"90%"} my={4} backgroundColor={"#BF1120"} onPress={handleConfirm}>
+      <Button
+        w={"90%"}
+        my={4}
+        backgroundColor={"#BF1120"}
+        onPress={handleConfirm}
+      >
         Confirmar
       </Button>
     </Center>

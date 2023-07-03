@@ -4,9 +4,28 @@ import { signIn } from "../Auth/login.js";
 import { getData, updateData, conditionalGetData } from "../Store/userData.js";
 import { arrayUnion } from "firebase/firestore";
 import { isAsyncMode } from "react-is";
+import Carteirinha from "./Carteirinha.js";
 
 export default class Usuario {
-  constructor() {}
+  constructor(result) {
+    this.nome = result?.info.name;
+    this.email = result?.info.email;
+    this.cpf = result?.info.cpf;
+    this.endereco = result?.info.address;
+    this.telefone = result?.info.phone;
+    this.dataRegistro = result?.info.registerDate;
+    this.validade = result?.info.validityDate;
+    this.matricula = result?.info.matricula;
+    this.rg = result?.info.rg;
+    this.curso = result?.info.course;
+    this.foto = result?.info.photo;
+    this.isAdmin = result?.isAdmin;
+    this.carteirinha = new Carteirinha(result);
+  }
+
+  getCarteirinha() {
+    return this.carteirinha;
+  }
 
   async realizarLogin(username, password) {
     // TODO: realiza login
@@ -19,24 +38,7 @@ export default class Usuario {
       this.uid = data.uid;
       console.log(this.uid);
       // retorna os dados do usuario de acordo com o uid
-      const userData = await getData("users", this.uid);
-      let result = userData.data();
-
-      console.log("result ", result);
-      // leitura dos dados de cadastro
-      this.nome = result.info.name;
-      this.email = result.info.email;
-      this.cpf = result.info.cpf;
-      this.endereco = result.info.address;
-      this.telefone = result.info.phone;
-      this.dataRegistro = result.info.registerDate;
-      this.validade = result.info.validityDate;
-      this.matricula = result.info.matricula;
-      this.rg = result.info.rg;
-      this.curso = result.info.course;
-
-      // leitura dos dados da carteira
-      this.carteirinha = result.wallet;
+      await this.puxarDados(this.uid);
     } catch (err) {
       console.log("user login err ", err);
       throw err;
@@ -44,24 +46,27 @@ export default class Usuario {
   }
 
   async puxarDados(uid = this.uid) {
-    getData("users", uid).then((data) => {
-      let result = data.data();
+    const data = await getData("users", uid);
+    let result = data.data();
 
-      // leitura dos dados de cadastro
-      this.nome = result.info.name;
-      this.email = result.info.email;
-      this.cpf = result.info.cpf;
-      this.endereco = result.info.address;
-      this.telefone = result.info.phone;
-      this.dataRegistro = result.info.registerDate;
-      this.validade = result.info.validityDate;
-      this.matricula = result.info.matricula;
-
-      // leitura dos dados da carteira
-      this.carteirinha = result.wallet;
-    });
+    console.log('puxar dados result ')
+    // leitura dos dados de cadastro
+    this.nome = result?.info.name;
+    this.email = result?.info.email;
+    this.cpf = result?.info.cpf;
+    this.endereco = result?.info.address;
+    this.telefone = result?.info.phone;
+    this.dataRegistro = result?.info.registerDate;
+    this.validade = result?.info.validityDate;
+    this.matricula = result?.info.matricula;
+    this.rg = result?.info.rg;
+    this.curso = result?.info.course;
+    this.foto = result?.info.photo;
+    this.isAdmin = result?.isAdmin;
+    this.carteirinha = new Carteirinha(result);
   }
 
+  /*
   static async registrarTrasacao(valor, tipo, uid = this.uid) {
     try {
       await this.puxarDados(uid);
@@ -88,9 +93,9 @@ export default class Usuario {
       return false;
     }
   }
+  */
 
   /*
-
   async compartilharSaldo(valor, uidDestino, uid = this.uid) {
     try {
       await this.puxarDados(uid);
@@ -112,9 +117,7 @@ export default class Usuario {
       return false;
     }
   }
-
   */
-
   static async buscarUsuarioPorCPF(cpf) {
     // TODO: buscar usuario por cpf no firebase
     try {
